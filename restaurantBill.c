@@ -11,6 +11,26 @@ Outline for Restaurant Bill:
 #include <stdlib.h>
 #include <time.h>
 
+const char* mealType(int meal)
+{
+    if (meal == 0)
+    {
+        return "Salad";
+    }
+    else if (meal == 1)
+    {
+        return "Soup";
+    }
+    else if (meal == 2)
+    {
+        return "Sandwich";
+    }
+    else if (meal == 3)
+    {
+        return "Pizza";
+    }
+}
+
 int main(void)
 {
     // declare necessary variables
@@ -30,14 +50,30 @@ int main(void)
         mealCosts[0], mealCosts[1], mealCosts[2], mealCosts[3]);
 
     // ask user for tax percentage
-    printf("Enter Tax percent: ");
-    scanf("%f", &taxFloat);
+    do
+    {
+        printf("Enter Tax percent: ");
+        scanf("%f", &taxFloat);
+        if(taxFloat <= 0)
+        {
+            printf("Please enter a valid tax amount.\n");
+        }
+    }while(taxFloat <= 0);
+
     // ask user for tip percentage
-    printf("Enter Tip percent: ");
-    scanf("%f", &tipFloat);
+    do
+    {
+        printf("Enter Tip percent: ");
+        scanf("%f", &tipFloat);
+        if(tipFloat <= 0)
+        {
+            printf("Please enter a valid tax amount.\n");
+        }
+    }while(tipFloat <= 0);
 
     // print out the complete bill to the console
     printf("\n   **Total Bill**\n");
+    printf("Item:\t\t%s\n", mealType(mealChoice));
     printf("Subtotal:\t$%.2f\n", mealCosts[mealChoice]);              // get meal price
     printf("Tax:\t\t$%.2f\n", (mealCosts[mealChoice] * (taxFloat/100)));     // calculate tax from meal cost
     printf("Tip:\t\t$%.2f\n", (mealCosts[mealChoice] * (tipFloat/100)));     // calculate tip from meal cost
