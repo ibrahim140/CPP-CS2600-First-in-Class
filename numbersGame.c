@@ -10,6 +10,7 @@ Outline for Number Guessing Game:
             also allow user to return to main menu.
         (b) Option 2: inform user of the current max value and prompt user to enter a new max value
         (c) Option 3: exit the process
+    (6) add file I/O to save the users max value for the program to read in
 */
 
 #include <stdio.h>
@@ -20,7 +21,7 @@ Outline for Number Guessing Game:
 void main()
 {
     // declare necessary variables
-    int menuOptionInt, randomInt, userInt, userMaxValueInt = 10;
+    int menuOptionInt, randomInt, userInt, fileSize, userMaxValueInt;
     const int MAX_INT = 10;
 
     printf("\nWelcome to a Number Guessing Game!\n");
@@ -28,26 +29,23 @@ void main()
     do
     {
         printf("\nPlease Choose One:\n\tEnter 1 to play a game\n\tEnter 2 to change the Max Value\n\tEnter 3 to Quit\n");
+        printf("Choice: ");
         scanf("%d", &menuOptionInt);
-
+        fflush(stdin);
         switch(menuOptionInt)
         {
             case 1:
                 srand(time(NULL));
-                randomInt = (rand() % userMaxValueInt) + 1;
+                randomInt = (rand() % MAX_INT) + 1;
                 printf("%d", randomInt);
-                printf("\nYou've chosen to play a game\n");//Please guess a number between 1 and %d: ", MAX_INT);
-                //scanf("%d", &userInt);
+                printf("\nYou've chosen to play a game\n");
                 
                 char strArray[10];
 
                 do
                 {
-                    printf("\n%d", userMaxValueInt);
                     printf("\nPlease guess a number between 1 and %d: ", MAX_INT);
-                    fgets(strArray, sizeof(strArray),stdin);
-                    printf("\n%d\n", userMaxValueInt);
-                    
+                    fgets(strArray, sizeof(strArray), stdin);                    
 
                     if(tolower(strArray[0]) != 'q')
                     {
@@ -85,17 +83,5 @@ void main()
 
     } while (menuOptionInt != 3);
     printf("Thank you for playing!");
-  //  exit (EXIT_FAILURE);
+    exit (EXIT_FAILURE);
 }
-
-/*If option 1 is selected the program should prompt the user to enter a number. 
-If the user is correct tell them they won then the program should go back to the menu. 
-Otherwise tell them if they were too low or high in there guess and allow them to guess again. 
-This should continue until they win. If they enter q instead of a number when prompted the game should end(NOT the program) and return to the menu.
-
-If option 2 is chosen, then tell them the max value they can set the number. Make sure they do not enter a negative number or go above the max value.
-
-If option 3 thank user & quit.
-
-Now create a new branch – call it save_user_max_numberCan you save the users request for the max number where the program is able to remember it the next time it starts?  
-*/
