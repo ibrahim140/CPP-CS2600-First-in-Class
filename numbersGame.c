@@ -15,48 +15,78 @@ Outline for Number Guessing Game:
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 
 void main()
 {
     // declare necessary variables
-    int menuOptionInt, randomInt, userInt;
-    int maxValueInt = 10;
+    int menuOptionInt, randomInt, userInt, userMaxValueInt = 10;
+    const int MAX_INT = 10;
 
-    printf("Welcome to a Number Guessing Game!");
+    printf("\nWelcome to a Number Guessing Game!\n");
 
     do
     {
-        printf("\nPlease Choose One:\n\tPress 1 to play a game\n\tPress 2 to change the Max Value\n\tPress 3 to Quit\n");
+        printf("\nPlease Choose One:\n\tEnter 1 to play a game\n\tEnter 2 to change the Max Value\n\tEnter 3 to Quit\n");
         scanf("%d", &menuOptionInt);
 
         switch(menuOptionInt)
         {
             case 1:
                 srand(time(NULL));
-                randomInt = (rand() % 10) + 1;
-                //printf("%d", randomInt);
-                printf("\nYou chose to play a game\nPlease guess a number between 1 and %d: ", maxValueInt);
-                scanf("%d", &userInt);
+                randomInt = (rand() % MAX_INT) + 1;
+                printf("%d", randomInt);
+                printf("\nYou've chosen to play a game\n");//Please guess a number between 1 and %d: ", MAX_INT);
+                //scanf("%d", &userInt);
                 
+                char strArray[1];
+
                 do
                 {
-                    if(userInt < randomInt)
-                    {
-                        printf("\nYour guess is too low, try again.");
-                    }
-                    else if(userInt > randomInt)
-                    {
-                        printf("\nYour guess is too high, try again.");
-                    }
-                    printf("\nPlease guess a number between 1 and %d: ", maxValueInt);
-                    scanf("%d", &userInt);
+                    printf("\nPlease guess a number between 1 and %d: ", MAX_INT);
+                    scanf("%s", &strArray);
 
-                } while (userInt != randomInt);
+                    if(tolower(strArray[0]) != 'q')
+                    {
+                        userInt = atoi(strArray);
+                        if(userInt < randomInt)
+                        {
+                            printf("\nYour guess is too low, try again.");
+                        }
+                        else if(userInt > randomInt)
+                        {
+                            printf("\nYour guess is too high, try again.");
+                        }
+                    }
+                } while ((strArray[0] != 'q') && userInt != randomInt);
+
+                if(userInt == randomInt)
+                {
+                    printf("\nCongratulations! You guess the number correctly! Returning to Main Menu.\n");
+                }
+                break;
+
+            case 2:
+                printf("\nEnter new Max Value from 1 to %d: ", MAX_INT);
+                scanf("%d", &userMaxValueInt);
+                do
+                {
+                    if(userMaxValueInt < 1 || userMaxValueInt > 10 )
+                    {
+                        printf("\nPlease enter a value from 1 to %d", MAX_INT);
+                        printf("\nEnter new Max Value: ");
+                        scanf("%d", &userMaxValueInt);
+                    }
+                } while (userMaxValueInt < 1 || userMaxValueInt > 10);
+                printf("New max value is set.\n");
+
                 break;
         }
 
-    }while (menuOptionInt != 3);
-
+    } while (menuOptionInt != 3);
+    printf("Thank you for playing!");
+  //  exit (EXIT_FAILURE);
+}
 
 /*If option 1 is selected the program should prompt the user to enter a number. 
 If the user is correct tell them they won then the program should go back to the menu. 
@@ -65,10 +95,7 @@ This should continue until they win. If they enter q instead of a number when pr
 
 If option 2 is chosen, then tell them the max value they can set the number. Make sure they do not enter a negative number or go above the max value.
 
-If option 3 thank & quit.
+If option 3 thank user & quit.
 
 Now create a new branch – call it save_user_max_numberCan you save the users request for the max number where the program is able to remember it the next time it starts?  
 */
-
-
-}
