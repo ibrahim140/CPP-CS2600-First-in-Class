@@ -37,7 +37,7 @@ void main()
             case 1:
                 srand(time(NULL));
                 randomInt = (rand() % MAX_INT) + 1;
-                printf("%d", randomInt);
+                //printf("%d", randomInt);
                 printf("\nYou've chosen to play a game\n");
                 
                 char strArray[10];
