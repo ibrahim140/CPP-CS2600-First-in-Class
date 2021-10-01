@@ -34,17 +34,20 @@ void main()
         {
             case 1:
                 srand(time(NULL));
-                randomInt = (rand() % MAX_INT) + 1;
+                randomInt = (rand() % userMaxValueInt) + 1;
                 printf("%d", randomInt);
                 printf("\nYou've chosen to play a game\n");//Please guess a number between 1 and %d: ", MAX_INT);
                 //scanf("%d", &userInt);
                 
-                char strArray[1];
+                char strArray[10];
 
                 do
                 {
+                    printf("\n%d", userMaxValueInt);
                     printf("\nPlease guess a number between 1 and %d: ", MAX_INT);
-                    scanf("%s", &strArray);
+                    fgets(strArray, sizeof(strArray),stdin);
+                    printf("\n%d\n", userMaxValueInt);
+                    
 
                     if(tolower(strArray[0]) != 'q')
                     {
@@ -69,15 +72,12 @@ void main()
             case 2:
                 printf("\nEnter new Max Value from 1 to %d: ", MAX_INT);
                 scanf("%d", &userMaxValueInt);
-                do
+                while(userMaxValueInt < 1 || userMaxValueInt > 10)
                 {
-                    if(userMaxValueInt < 1 || userMaxValueInt > 10 )
-                    {
-                        printf("\nPlease enter a value from 1 to %d", MAX_INT);
-                        printf("\nEnter new Max Value: ");
-                        scanf("%d", &userMaxValueInt);
-                    }
-                } while (userMaxValueInt < 1 || userMaxValueInt > 10);
+                    printf("\nPlease enter a value from 1 to %d", MAX_INT);
+                    printf("\nEnter new Max Value: ");
+                    scanf("%d", &userMaxValueInt);
+                }
                 printf("New max value is set.\n");
 
                 break;
