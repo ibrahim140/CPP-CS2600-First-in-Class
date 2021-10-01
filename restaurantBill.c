@@ -11,8 +11,10 @@ Outline for Restaurant Bill:
 #include <stdlib.h>
 #include <time.h>
 
+// meal type function
 const char* mealType(int meal)
 {
+    // return the appropriate meal type where the function is called
     if (meal == 0)
     {
         return "Salad";
@@ -52,8 +54,10 @@ int main(void)
     // ask user for tax percentage
     do
     {
+        // get tax % from user
         printf("Enter Tax percent: ");
         scanf("%f", &taxFloat);
+        // input validation on tax
         if(taxFloat <= 0)
         {
             printf("Please enter a valid tax amount.\n");
@@ -63,8 +67,10 @@ int main(void)
     // ask user for tip percentage
     do
     {
+        // get tip % from user
         printf("Enter Tip percent: ");
         scanf("%f", &tipFloat);
+        // input validation on tip percentage
         if(tipFloat <= 0)
         {
             printf("Please enter a valid tax amount.\n");
@@ -73,8 +79,8 @@ int main(void)
 
     // print out the complete bill to the console
     printf("\n   **Total Bill**\n");
-    printf("Item:\t\t%s\n", mealType(mealChoice));
-    printf("Subtotal:\t$%.2f\n", mealCosts[mealChoice]);              // get meal price
+    printf("Item:\t\t%s\n", mealType(mealChoice));                      // print meal type
+    printf("Subtotal:\t$%.2f\n", mealCosts[mealChoice]);                // get meal price
     printf("Tax:\t\t$%.2f\n", (mealCosts[mealChoice] * (taxFloat/100)));     // calculate tax from meal cost
     printf("Tip:\t\t$%.2f\n", (mealCosts[mealChoice] * (tipFloat/100)));     // calculate tip from meal cost
     printf("Total:\t\t$%.2f\n\n", (mealCosts[mealChoice] + (mealCosts[mealChoice] * (taxFloat/100)) +        // calculate bill total
